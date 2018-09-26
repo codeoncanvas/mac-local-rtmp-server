@@ -25,12 +25,12 @@
   },
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder -p always",
+    "dist": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sallar/mac-local-rtmp-server.git"
+    "url": "git+https://github.com/codeoncanvas/mac-local-rtmp-server.git"
   },
   "keywords": [
     "rtmp",
