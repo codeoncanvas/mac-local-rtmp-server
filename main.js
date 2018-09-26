@@ -32,6 +32,21 @@ const menubar = Menubar({
 (async () => {
   const port = await getPort();
 
+  // const nms = new NodeMediaServer({
+  //   rtmp: {
+  //     port: 1935,
+  //     chunk_size: 60000,
+  //     gop_cache: true,
+  //     ping: 60,
+  //     ping_timeout: 30
+  //   },
+  //   http: {
+  //     port,
+  //     allow_origin: '*'
+  //   }
+  // });
+
+
   const nms = new NodeMediaServer({
     rtmp: {
       port: 1935,
@@ -42,7 +57,21 @@ const menubar = Menubar({
     },
     http: {
       port,
+      mediaroot: './media',
       allow_origin: '*'
+    },
+    trans: {
+      ffmpeg: '/usr/local/bin/ffmpeg',
+      tasks: [
+        {
+          app: 'live',
+          ac: 'aac',
+          hls: true,
+          hlsFlags: '[hls_time=2:hls_list_size=3:hls_flags=delete_segments]',
+          dash: true,
+          dashFlags: '[f=dash:window_size=3:extra_window_size=5]'
+        }
+      ]
     }
   });
 
