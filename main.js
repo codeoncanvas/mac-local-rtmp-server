@@ -30,7 +30,13 @@ const menubar = Menubar({
 });
 
 (async () => {
-  const port = await getPort();
+  const port = await getPort({port: 8000});
+  if (port != 8000) {
+    console.log('Cannot use port 8000, instead will use ' + port);
+  }
+  else {
+    console.log('Success, will use port 8000');
+  }
 
   // const nms = new NodeMediaServer({
   //   rtmp: {
@@ -56,7 +62,7 @@ const menubar = Menubar({
       ping_timeout: 30
     },
     http: {
-      port,
+      port: port,
       mediaroot: './media',
       allow_origin: '*'
     },
